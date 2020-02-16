@@ -100,25 +100,25 @@ plot(sp_500_all)
 
 round(accuracy(f = sp_500_all, x = sp_500_test, test = NULL,d =NULL,D = NULL), 3)
 
-aa = snaive(sp_500_training,h=27)
-aa1 = forecast(aa,h=12)
-round(accuracy(f = aa1, x = sp_500_test, test = NULL,d =NULL,D = NULL), 3)
+snaiveTraining = snaive(sp_500_training,h=27)
+forecastedSnaive = forecast(snaiveTraining,h=12)
+round(accuracy(f = forecastedsnaive, x = sp_500_test, test = NULL,d =NULL,D = NULL), 3)
 
-bb = meanf(sp_500_training,h=27)
-bb1 = forecast(bb,h=27)
-round(accuracy(f = bb1, x = sp_500_test, test = NULL,d =NULL,D = NULL), 3)
+meanfTraining = meanf(sp_500_training,h=27)
+forecastedMeanf = forecast(meanfTraining,h=27)
+round(accuracy(f = forecastedMeanf, x = sp_500_test, test = NULL,d =NULL,D = NULL), 3)
 
-cc = naive(sp_500_training,h=27)
-cc1 = forecast(cc,h=27)
-round(accuracy(f = cc1, x = sp_500_test, test = NULL,d =NULL,D = NULL), 3)
+naiveTraining = naive(sp_500_training,h=27)
+forcastedNaive = forecast(naiveTraining,h=27)
+round(accuracy(f = forcastedNaive, x = sp_500_test, test = NULL,d =NULL,D = NULL), 3)
 
 train <- sp_500_training
 test <- sp_500_test
 
 ARIMA <-  as.ts(sp_500_all)[, 1]
-snaive <- as.ts(aa1)[, 1]
-meanf <- as.ts(bb1)[, 1]
-naive <- as.ts(cc1)[, 1]
+snaive <- as.ts(forecastedSnaive)[, 1]
+meanf <- as.ts(forecastedMeanf)[, 1]
+naive <- as.ts(forcastedNaive)[, 1]
 
 AP <- cbind(sp_500, train, test, 
             ARIMA, snaive, meanf, naive)
